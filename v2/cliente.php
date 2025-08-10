@@ -9,5 +9,12 @@
             $token = $_SERVER['HTTP_TOKEN'];
             echo $http->get("/cliente/v2",$token);
             die();
+
+        case "POST":
+            $token = $_SERVER['HTTP_TOKEN'];
+            $body = file_get_contents("php://input");
+            echo $http->post("/cliente/v2", $token, $body);
+            die();
+
     }
 ?>
