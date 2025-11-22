@@ -18,7 +18,7 @@ ini_set('display_errors', 1);
             if(isset($_GET['listado'])){
                 $token = $_SERVER['HTTP_TOKEN'];
                 $body = file_get_contents("php://input");
-                echo $http->put("/proyecto/v2/listado", $token, $body);
+                echo $http->post("/proyecto/v2/listado", $token, $body);
                 die();
             }else{
                 $token = $_SERVER['HTTP_TOKEN'];
