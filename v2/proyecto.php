@@ -13,7 +13,12 @@
                 $body = file_get_contents("php://input");
                 echo $http->post("/proyecto/v2/listado", $token, $body);
                 die();
-            }else{
+            } if (isset($_GET['comentario'])){
+                $token = $_SERVER['HTTP_TOKEN'];
+                $body = file_get_contents("php://input");
+                echo $http->post("/proyecto/v2/comentario", $token, $body);
+                die();
+            } else {
                 $token = $_SERVER['HTTP_TOKEN'];
                 $body = file_get_contents("php://input");
                 echo $http->post("/proyecto/v2", $token, $body);
@@ -32,6 +37,11 @@
                 $body = file_get_contents("php://input");
                 echo $http->put("/proyecto/v2/etapa", $token, $body);
                 die();
+            }if(isset($_GET['comentario'])){
+                $token = $_SERVER['HTTP_TOKEN'];
+                $body = file_get_contents("php://input");
+                echo $http->put("/proyecto/v2/comentario", $token, $body);
+                die();
             }else{
                 $token = $_SERVER['HTTP_TOKEN'];
                 $body = file_get_contents("php://input");
@@ -47,6 +57,15 @@
                 $ticketp = $_GET['ticket'];
                 $response = $http->get("/proyecto/v2?ticket=$ticketp", $token);
                 echo $http->get("/proyecto/v2?ticket=$ticketp", $token);
+                die();
+            } else if(isset($_GET['comentario']) && isset($_GET['listado'])){
+                $token = $_SERVER['HTTP_TOKEN'];
+
+                $elem = $_GET['elementos'];
+                $proyecto = $_GET['idProyecto'];
+                $pag = $_GET['pagina'];
+                $response = $http->get("/proyecto/v2/comentario/listado?elementos=$elem&idProyecto=$proyecto&pagina=$pag", $token);
+                echo $http->get("/proyecto/v2/comentario/listado?elementos=$elem&idProyecto=$proyecto&pagina=$pag", $token);
                 die();
             }
            
