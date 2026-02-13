@@ -6,10 +6,17 @@
     $http = new HttpService($util->ServerProtocolo."://".$util->ServerDominio.":".$util->ServerPuerto);
     switch ($_SERVER['REQUEST_METHOD']) {
         case "POST":
-            $token = $_SERVER['HTTP_TOKEN'];
-            $body = file_get_contents("php://input");
-            echo $http->post("/trabajador/v2", $token, $body);
-            die();
+            if(isset($_GET['listar'])){
+                $token = $_SERVER['HTTP_TOKEN'];
+                $body = file_get_contents("php://input");
+                echo $http->post("/trabajador/v2/listar/nombre", $token, $body);
+                die();
+            } else {
+                $token = $_SERVER['HTTP_TOKEN'];
+                $body = file_get_contents("php://input");
+                echo $http->post("/trabajador/v2", $token, $body);
+                die();
+            }
 
     }
 ?>
